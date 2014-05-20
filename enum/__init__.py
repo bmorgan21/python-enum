@@ -57,6 +57,9 @@ class MetaEnum(type):
         for key in mcs._item_dict:
             yield key
 
+    def __repr__(mcs):
+        return '{}.{}'.format(mcs.__module__, mcs.__name__)
+
 class EnumItem(object):
     def __init__(self, key, value, name=None, sort=None, **metadata):
         self.key = key
