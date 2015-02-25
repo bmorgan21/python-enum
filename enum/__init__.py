@@ -1,5 +1,6 @@
 """Contains the Enum class for symbolically representing code constants"""
 import inspect
+import random
 
 class MetaEnum(type):
     """MetaClass for Enum"""
@@ -212,6 +213,14 @@ class Enum:
     @classmethod
     def from_int(cls, value):
         return value
+
+    @classmethod
+    def random(cls):
+        verbose = cls.verbose()
+        length = len(verbose)
+        index = random.randint(0, length - 1)
+
+        return verbose[index][0]
 
     @classmethod
     def lookup(cls, key, get=False):
