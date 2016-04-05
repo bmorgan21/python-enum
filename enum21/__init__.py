@@ -2,6 +2,7 @@
 import inspect
 import random
 
+
 class MetaEnum(type):
     """MetaClass for Enum"""
     def __init__(mcs, name, bases, attrs):
@@ -11,7 +12,7 @@ class MetaEnum(type):
 
         for base in bases:
             if hasattr(base, '_item_dict'):
-                for k,v in base._item_dict.items():
+                for k, v in base._item_dict.items():
                     if not issubclass(mcs, NonUniqueEnum) and k in item_dict and (item_dict[k].key != v.key or item_dict[k].value != v.value):
                         raise Exception('Value already exists.  Found %s for %s.  Trying to add %s for %s' % (item_dict[k], k, v, k))
 
@@ -61,6 +62,7 @@ class MetaEnum(type):
     def __repr__(mcs):
         return '{}.{}'.format(mcs.__module__, mcs.__name__)
 
+
 class EnumItem(object):
     def __init__(self, key, value, name=None, sort=None, **metadata):
         self.key = key
@@ -68,6 +70,7 @@ class EnumItem(object):
         self.name = name
         self.sort = sort
         self.metadata = metadata
+
 
 class Enum:
     """Enum Data Type
@@ -271,7 +274,7 @@ class Enum:
     @classmethod
     def metadata(cls, *args):
         if len(args) == 0:
-            return {x.key:x.metadata for x in cls._item_dict.values()}
+            return {x.key: x.metadata for x in cls._item_dict.values()}
 
         item = cls._item_dict.get(*args)
         if isinstance(item, EnumItem):
@@ -291,6 +294,7 @@ class Enum:
             ret[i] = (ret[i][0], ret[i][1], cls.metadata(ret[i][0]))
 
         return ret
+
 
 class NonUniqueEnum(Enum):
     pass

@@ -1,2 +1,3 @@
-python-enum
+enum21
 ===========
+Enum library
